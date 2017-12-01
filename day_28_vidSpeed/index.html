@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Speed Scrubber</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="wrapper">
+    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
+    <div class="speed">
+      <div class="speed-bar">1×</div>
+    </div>
+  </div>
+
+<script>
+
+//get triggers from style and HTML
+const speed = document.querySelector('.speed');
+const bar = speed.querySelector('.speed-bar');
+const video = document.querySelector('.flex');
+
+//write function to run on mousemove
+speed.addEventListener('mousemove', function (e) {
+    //obtain height of bar
+    const y = e.pageY - this.offsetTop;
+    //make sure you only have height of bar, offsetting height from top of page
+    const percent = y / this.offsetHeight;
+    //set min and max values for bar
+    const min = 0.4;
+    const max = 4;
+    //set percentage values within bar so that top of bar is 0% and bottom is 100%
+    const height = Math.round(percent * 100) + '%';
+    //set playback rate 0% to be equal to .4 playback and 100% to 4
+    const playbackRate = percent * (max-min) + min;
+    //set bar style to update with mousemove
+    bar.style.height = height;
+    //set text content to update on mouse move to be the percentage
+    bar.textContent = playbackRate.toFixed(2) + "x";
+    //set playback rate to be equal to the displayed rate on the style bar
+    video.playbackRate = playbackRate;
+});
+
+</script>
+</body>
+</html>
