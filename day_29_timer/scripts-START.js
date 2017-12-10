@@ -1,3 +1,4 @@
+//set variables
 let countdown;
 const timerDisplay = document.querySelector('.display__time-left');
 const endTime = document.querySelector('.display__end-time');
@@ -24,6 +25,7 @@ function timer(seconds) {
     }, 1000);
 }
 
+//display the amount of time left
 function displayTimeLeft (seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainderSeconds = seconds % 60;
@@ -32,6 +34,7 @@ function displayTimeLeft (seconds) {
     timerDisplay.textContent = display;
 }
 
+// display the ending time that will occur when the timer is finished
 function displayEndTime (timestamp) {
     const end = new Date (timestamp);
     const hour = end.getHours();
@@ -40,11 +43,13 @@ function displayEndTime (timestamp) {
 
 }
 
+//start the timer
 function startTimer () {
     const seconds = parseInt(this.dataset.time);
     timer(seconds);
 }
 
+//if a button is pressed, start the timer with the amount of time on the button pressed
 buttons.forEach(button => button.addEventListener('click', startTimer))
 document.customForm.addEventListener('submit', function(e) {
     e.preventDefault();
